@@ -67,8 +67,10 @@ namespace TGC.Group.Model {
             // para debuggear
             // renderizo en este orden asi superior e inferior, que tienen 1px de altura
             // puedan tapar a centro.
+            /*
             cuerpo.Render();
             superior.Render();
+            */
         }
 
         public void Dispose() {

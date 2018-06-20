@@ -4,9 +4,11 @@ using Microsoft.DirectX.DirectInput;
 using Microsoft.DirectX.DirectSound;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using TGC.Core.BoundingVolumes;
 using TGC.Core.Collision;
+using TGC.Core.Geometry;
 using TGC.Core.Input;
 using TGC.Core.Mathematica;
 using TGC.Core.Particle;
@@ -61,6 +63,9 @@ namespace TGC.Group.Model {
         private int saltosRestantes = 0;
         private const int SALTOS_TOTALES = 2;
         private const float JUMP_SPEED = 10f; // PC Cristian
+
+        // debug
+        TgcBoundingAxisAlignBox colisionadorCercanoDebug;
 
         public Personaje(string MediaDir, string shaderDir) {
             vidas = 3;
@@ -130,6 +135,22 @@ namespace TGC.Group.Model {
 
             // seria un post-update
             if (dir.Length() == 0) moving = false;
+
+            var flecha = new TgcArrow();
+            flecha.Thickness = 2f;
+            flecha.HeadSize = new TGCVector2(20f, 20f);
+            flecha.HeadColor = Color.DarkRed;
+            flecha.BodyColor = Color.Red;
+            flecha.PStart = rayoVelocidad.Origin;
+            flecha.PEnd = rayoVelocidad.Origin + rayoVelocidad.Direction * 20f;
+            flecha.updateValues();
+            flecha.Render();
+
+            if (colisionadorCercanoDebug != null) {
+                colisionadorCercanoDebug.setRenderColor(Color.Blue);
+                colisionadorCercanoDebug.Render();
+
+            }
         }
 
         public void prepareForShadowMapping(TGCVector3 lightPos, TGCVector3 lightDir,
@@ -262,27 +283,15 @@ namespace TGC.Group.Model {
                 aterrizar();
                 modificarMovimientoSegunPiso(piso, nivel, deltaTime);
                 if (nivel.esPisoRotante(piso)) {
+                    // TODO: ?????????
+                    // creo que acá quería hacer que el personaje se mueva en las plataformas rotantes
                     int i = 1;
                 };
             }
 
             if (dir.Y != 0) vel.Y = dir.Y;
 
-            TGCVector3 horizontal = new TGCVector3 {
-                X = vel.X,
-                Y = 0,
-                Z = vel.Z
-            };
-
-            TGCVector3 vertical = new TGCVector3 {
-                X = 0,
-                Y = vel.Y,
-                Z = 0
-            };
-
-
-            movimientoHorizontal(horizontal, nivel.getBoundingBoxes(), deltaTime, 0);
-            movimientoVertical(vertical, nivel, deltaTime, 0);
+            movimiento(vel, nivel.getBoundingBoxes(), deltaTime, 0);
 
             resetearMovimientoSegunPiso(piso, nivel);
             emmiter.Position = pies.Position;
@@ -308,93 +317,57 @@ namespace TGC.Group.Model {
             }
         }
 
-        private void movimientoHorizontal(TGCVector3 movement, List<TgcBoundingAxisAlignBox> colliders, float deltaTime, int count) {
+        private void movimiento(
+            TGCVector3 movement,
+            List<TgcBoundingAxisAlignBox> colliders,
+            float deltaTime,
+            int count) {
+
             if (count > 5) return;
 
             rayoVelocidad.Origin = this.getBoundingSphere().Center;
             rayoVelocidad.Direction = movement;
 
+            TGCVector3 closest = new TGCVector3();
             TGCVector3 aux = new TGCVector3();
+            TgcBoundingAxisAlignBox colisionadorCercano = null;
 
-            TgcBoundingAxisAlignBox paredCercana = colliders
-                // tomo las aabb que colisionan
-                .Where(b => TgcCollisionUtils.intersectRayAABB(rayoVelocidad, b, out aux))
-                // ordeno por distancia
-                .OrderBy(b => {
-                    TgcCollisionUtils.intersectRayAABB(rayoVelocidad, b, out aux);
-                    return aux.LengthSq();
-                })
-                // tomo la primera
-                .DefaultIfEmpty(null)
-                .First();
+            // busco entre los colliders del nivel con cuales colisiona
+            // el rayo de movimiento, y de esos saco el mas cercano
+            colliders.ForEach(c => {
+                bool colisiona = TgcCollisionUtils.intersectRayAABB(rayoVelocidad, c, out aux);
 
-            if (paredCercana == null) {
+                if (colisiona) {
+                    if (colisionadorCercano == null || closest.LengthSq() > aux.LengthSq()) {
+                        colisionadorCercano = c;
+                        closest = aux;
+                    }
+                }
+            });
+
+            // por si no hay paredes en el nivel
+            if (colisionadorCercano == null) {
+                this.translate(movement);
+                return;
+            }
+
+            colisionadorCercanoDebug = colisionadorCercano;
+
+            TGCVector3 radius =
+                TGCVector3.Normalize(movement) * this.getBoundingSphere().Radius;
+
+            TGCVector3 distance =
+                TgcCollisionUtils.closestPointAABB(this.getBoundingSphere().Center, colisionadorCercano) - this.getBoundingSphere().Center;
+
+            if ((distance - radius).Length() < 1) return;
+
+            if ((radius + movement).Length() < distance.Length()) {
                 this.translate(movement);
             } else {
-                // llamo a la función una vez mas para obtener la intersección en aux
-                TgcCollisionUtils.intersectRayAABB(rayoVelocidad, paredCercana, out aux);
+                var foo = TGCVector3.Normalize(movement) * distance.Length();
+                movement = TGCVector3.Normalize(foo - distance) * WALK_SPEED * deltaTime;
 
-                TGCVector3 radius =
-                    TGCVector3.Normalize(movement) * this.getBoundingSphere().Radius;
-
-                TGCVector3 distance =
-                    TgcCollisionUtils.closestPointAABB(this.getBoundingSphere().Center, paredCercana) - this.getBoundingSphere().Center;
-
-                if ((distance - radius).Length() < 1) return;
-
-                if ((radius + movement).Length() < distance.Length()) {
-                    this.translate(movement);
-                } else {
-                    var foo = TGCVector3.Normalize(movement) * distance.Length();
-                    movement = TGCVector3.Normalize(foo - distance) * WALK_SPEED * deltaTime;
-
-                    this.movimientoHorizontal(movement, colliders, deltaTime, count + 1);
-                }
-            }
-        }
-
-        private void movimientoVertical(TGCVector3 movement, Nivel nivel, float deltaTime, int count) {
-            if (count > 5) return;
-
-            rayoVelocidad.Origin = this.getPies().Center;
-            rayoVelocidad.Direction = movement;
-
-            var colliders = nivel.getBoundingBoxes();
-
-            TGCVector3 aux = new TGCVector3();
-
-            TgcBoundingAxisAlignBox pisoCercano = colliders
-                .Where(b => TgcCollisionUtils.intersectRayAABB(rayoVelocidad, b, out aux))
-                .OrderBy(b => {
-                    TgcCollisionUtils.intersectRayAABB(rayoVelocidad, b, out aux);
-                    return aux.Length();
-                })
-                .DefaultIfEmpty(null)
-                .First();
-
-            if (pisoCercano == null) {
-                translate(movement);
-            } else {
-                pisoHeight = pisoCercano.PMax.Y;
-
-                TgcCollisionUtils.intersectRayAABB(rayoVelocidad, pisoCercano, out aux);
-
-                TGCVector3 radius =
-                    TGCVector3.Normalize(movement) * this.getBoundingSphere().Radius;
-
-                TGCVector3 distance =
-                    TgcCollisionUtils.closestPointAABB(this.getBoundingSphere().Center, pisoCercano) - this.getBoundingSphere().Center;
-
-                if ((distance - radius).Length() < 0.1f) return;
-
-                if ((radius + movement).Length() < distance.Length()) {
-                    this.translate(movement);
-                } else {
-                    var foo = TGCVector3.Normalize(movement) * distance.Length();
-                    movement = TGCVector3.Normalize(foo - distance) * WALK_SPEED * deltaTime;
-
-                    this.movimientoVertical(movement, nivel, deltaTime, count + 1);
-                }
+                this.movimiento(movement, colliders, deltaTime, count + 1);
             }
         }
 

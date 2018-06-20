@@ -28,7 +28,7 @@ namespace TGC.Group.Model.Scenes {
         private Microsoft.DirectX.Direct3D.Effect smEffect;
         private readonly int SM_SIZE = 1024;
         private readonly float NEAR_PLANE = 2;
-        private readonly float FAR_PLANE = 1500;
+        private readonly float FAR_PLANE = 5000;
         private Texture g_pShadowMap;
         private Surface g_pDDSShadow;
         private TGCMatrix g_mShadowProj;
@@ -122,8 +122,7 @@ namespace TGC.Group.Model.Scenes {
             g_pShadowMap = new Texture(D3DDevice.Instance.Device, SM_SIZE, SM_SIZE, 1, Usage.RenderTarget, Format.R32F, Pool.Default);
             g_pDDSShadow = D3DDevice.Instance.Device.CreateDepthStencilSurface(SM_SIZE, SM_SIZE, DepthFormat.D24S8, MultiSampleType.None, 0, true);
 
-
-             g_mShadowProj = TGCMatrix.PerspectiveFovLH(Geometry.DegreeToRadian(80), D3DDevice.Instance.AspectRatio, 50, 5000); 
+            g_mShadowProj = TGCMatrix.PerspectiveFovLH(Geometry.DegreeToRadian(80), D3DDevice.Instance.AspectRatio, 50, 5000); 
         }
 
         private void renderShadowMap(float deltaTime) {

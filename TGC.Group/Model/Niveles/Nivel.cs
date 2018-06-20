@@ -65,14 +65,14 @@ namespace TGC.Group.Model.Niveles {
         }
 
         public void render() {
-            smEffect.SetValue("k_ls", 0.2f);
+            smEffect.SetValue("k_ls", 0.3f);
             getRenderizables().ForEach(r => r.Render());
 
-            smEffect.SetValue("k_ls", 0.5f);
+            smEffect.SetValue("k_ls", 0.7f);
             getRenderizablesBrillantes().ForEach(r => r.Render());
 
             if (lfBox != null) lfBox.BoundingBox.Render();
-            aabbDeDecorativos.ForEach(r => r.Render());
+            // aabbDeDecorativos.ForEach(r => r.Render());
 
             if (skyBox != null) {
                 skyBox.Render();
