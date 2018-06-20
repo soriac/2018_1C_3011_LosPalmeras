@@ -31,6 +31,7 @@ namespace TGC.Group.Model {
             Musica.getInstance().setDsDevice(DirectSound.DsDevice);
 
             var escenaInicial = new InicioEscena();
+            //var escenaInicial = new GameEscena();
             EscenaManager.getInstance().setMediaDir(MediaDir);
             EscenaManager.getInstance().setShaderDir(ShadersDir);
             EscenaManager.getInstance().addScene(escenaInicial);
