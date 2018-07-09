@@ -178,7 +178,7 @@ namespace TGC.Group.Model.Scenes {
             flecha.PStart = lightPos;
             flecha.PEnd = lightPos + lightDir * 20f;
             flecha.updateValues();
-            // flecha.Render();
+            //flecha.Render();
         }
 
         public void dispose() {
@@ -196,39 +196,78 @@ namespace TGC.Group.Model.Scenes {
                     var distanciaPersonajeCaja = caja.getCuerpo().calculateBoxCenter() - personaje.getBoundingSphere().Center;
                     var cajaMovementDeseado = TGCVector3.Empty;
 
-                    // TODO: Implementar checkearColisionesCajaEstaticos y evitar que queden pegadas
+                    // TODO: Mejorar checkearColisionCajaEstaticos; aun no anda bien
                     if (FastMath.Abs(distanciaPersonajeCaja.X) > FastMath.Abs(distanciaPersonajeCaja.Z)) {
                         if (distanciaPersonajeCaja.X > 0) {
-                            cajaMovementDeseado = new TGCVector3(5, 0, 0);
+                            //if(checkearColisionCajaEstaticos(caja) != 1)
+                            //{
+                                cajaMovementDeseado = new TGCVector3(5, 0, 0);
+                            //}
                         } else {
-                            cajaMovementDeseado = new TGCVector3(-5, 0, 0);
+                            //if(checkearColisionCajaEstaticos(caja) != 3)
+                            //{
+                                cajaMovementDeseado = new TGCVector3(-5, 0, 0);
+                            //}
                         }
                     } else {
                         if (distanciaPersonajeCaja.Z > 0) {
-                            cajaMovementDeseado = new TGCVector3(0, 0, 5);
+                            //if(checkearColisionCajaEstaticos(caja) != 2)
+                            //{
+                                cajaMovementDeseado = new TGCVector3(0, 0, 5);
+                            //}
                         } else {
-                            cajaMovementDeseado = new TGCVector3(0, 0, -5);
+                            //if(checkearColisionCajaEstaticos(caja) != 4)
+                            //{
+                                cajaMovementDeseado = new TGCVector3(0, 0, -5);
+                            //}
                         }
                     }
 
                     caja.move(cajaMovementDeseado); //TEMP
-                    // personaje.playSound(3);
+                    //personaje.playSound(3);
                 }
             }
         }
 
         // Checkeo si la caja esta colisionando con una plataforma estatica o pared
-        private bool checkearColisionCajaEstaticos(Caja unaCaja)
+        // 0 si no choca con ninguna; 1 si tiene una delante; 2 si la tiene a la derecha
+        // 3 si tiene una atras; 4 si tiene una a la izquierda (visto desde la camara)
+        private int checkearColisionCajaEstaticos(Caja unaCaja)
         {
 
             foreach(var estatico in nivel.getEstaticos())
             {
+
+                var distanciaEntreObjetos = unaCaja.getCuerpo().calculateBoxCenter() - estatico.calculateBoxCenter();
+
                 if (TgcCollisionUtils.testAABBAABB(unaCaja.getCuerpo(), estatico))
                 {
-                    return true;
+                    if(distanciaEntreObjetos.X > distanciaEntreObjetos.Z)
+                    {
+                        if(distanciaEntreObjetos.X > 0)
+                        {
+                            return 1;
+                        }
+                        else
+                        {
+                            return 3;
+                        }
+                    }
+                    else
+                    {
+                        if(distanciaEntreObjetos.Z > 0)
+                        {
+                            return 2;
+                        }
+                        else
+                        {
+                            return 4;
+                        }
+                    }
                 }
             }
-            return false;
+
+            return 0;
 
         }
 

@@ -404,6 +404,7 @@
     <Content Include="Media\Sonidos\sonidoChoque.wav" />
     <Content Include="Media\Sonidos\sonidoSalto.mp3" />
     <Content Include="Media\Sonidos\sonidoSalto.wav" />
+    <Content Include="Media\Sounds\deathSound.mp3" />
     <Content Include="Media\stamina.png" />
     <Content Include="Media\staminaUnidad.png" />
     <Content Include="Media\tronco.jpg" />
@@ -411,6 +412,8 @@
     <Content Include="obj\Debug\TGC.Group.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TGC.Group.exe" />
     <Content Include="obj\Debug\TGC.Group.pdb" />
+    <Content Include="Shaders\BasicShader.fx" />
+    <Content Include="Shaders\ShadowMap.fx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

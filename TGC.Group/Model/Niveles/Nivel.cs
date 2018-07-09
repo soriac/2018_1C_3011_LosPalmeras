@@ -124,6 +124,7 @@ namespace TGC.Group.Model.Niveles {
                 .Concat(pRotantes)
                 .Concat(pAscensor)
                 .Concat(rampas)
+                .Concat(aabbDeDecorativos)
                 .ToList();
         }
 

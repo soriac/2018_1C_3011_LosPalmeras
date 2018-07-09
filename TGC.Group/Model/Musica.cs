@@ -28,6 +28,11 @@ namespace TGC.Group.Model {
             musicaDeFondo.play(true);
         }
 
+        public void detenerDeFondo()
+        {
+            musicaDeFondo.stop();
+        }
+
         public void setDsDevice(Device dsDevice) {
             this.dsDevice = dsDevice;
         }
