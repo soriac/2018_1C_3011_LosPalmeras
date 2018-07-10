@@ -11,7 +11,7 @@ namespace TGC.Group.Model.Niveles {
 
     class Nivel1 : Nivel {
 
-        TgcTexture piso, limites, trineo;
+        TgcTexture piso, limites, trineo, piedra, tronco;
         TgcScene[] escenasBananas;
         TgcScene[] escenasSelvaticos;
         TgcScene[] escenasPalmeras;
@@ -35,6 +35,10 @@ namespace TGC.Group.Model.Niveles {
             texturasUsadas.Add(piso);
             limites = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "paredJungla.jpg");
             texturasUsadas.Add(limites);
+            piedra = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "piedra.jpg");
+            texturasUsadas.Add(piedra);
+            tronco = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "tronco.jpg");
+            texturasUsadas.Add(tronco);
             trineo = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "Trineo.png");
             texturasUsadas.Add(trineo);
 
@@ -51,9 +55,21 @@ namespace TGC.Group.Model.Niveles {
             agregarPared(new TGCVector3(-710, 40, 5000), new TGCVector3(20, 80, 10000), limites); // limite derecho
             agregarPared(new TGCVector3(0, 40, 9990), new TGCVector3(1400, 80, 20), limites);     // frente
             agregarPared(new TGCVector3(0, 40, 10), new TGCVector3(1400, 80, 20), limites);       // fondo
-            //agregarEscaleraLateralIzquierda(new TGCVector3(0, 5, 6800), 40, new TGCVector3(150, 10, 20), caja);
-            //agregarEscaleraFrontal(new TGCVector3(0, 5, 6800), 40, new TGCVector3(150, 10, 20), caja);
-            //agregarRampa(new TGCVector3(0, 5, 6800), caja);
+
+            // Escaleras con plataforma de madera en el medio
+            int desp;
+            agregarEscaleraLateralIzquierda(new TGCVector3(0, 5, 6835), 15, new TGCVector3(80, 10, 20), piedra);
+            agregarPared(new TGCVector3(340, 75, 6835), new TGCVector3(100, 150, 80), tronco);      //1º Pilar izq.
+            agregarPared(new TGCVector3(340, 140, 6725), new TGCVector3(100, 20, 300), tronco);
+            agregarPared(new TGCVector3(340, 75, 6525), new TGCVector3(100, 150, 100), tronco);     //2º Pilar izq,
+            for(desp = 0; desp < 10; desp++)                // Pasarela del medio
+            {
+                agregarPared(new TGCVector3(351 - (desp * 78), 140, 6525), new TGCVector3(78, 20, 100), tronco);
+            }
+            agregarPared(new TGCVector3(-340, 75, 6525), new TGCVector3(100, 150, 100), tronco);     //1º Pilar der.
+            agregarPared(new TGCVector3(-340, 140, 6325), new TGCVector3(100, 20, 300), tronco);
+            agregarPared(new TGCVector3(-340, 75, 6215), new TGCVector3(100, 150, 80), tronco);     //2º Pilar der.
+            agregarEscaleraLateralDerecha(new TGCVector3(0, 5, 6215), 15, new TGCVector3(80, 10, 20), piedra);
 
             // Cajas empujables
             cajas.Add(new Caja(mediaDir, new TGCVector3(300, 40, 9000)));
