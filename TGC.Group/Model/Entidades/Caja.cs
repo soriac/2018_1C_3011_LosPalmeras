@@ -10,11 +10,13 @@ using TGC.Core.Textures;
 
 namespace TGC.Group.Model {
     public class Caja : IRenderObject {
+
         private TgcBoundingAxisAlignBox cuerpo;
         private TgcBoundingAxisAlignBox superior;
 
         private TGCBox box;
         private TGCVector3 vel;
+        private bool yaCheckeada;
 
         bool alpha = true;
         public bool AlphaBlendEnable { get => alpha; set { alpha = value; } }
@@ -26,6 +28,7 @@ namespace TGC.Group.Model {
             // TODO: tengo que hacer dispose de esta textura? la hago global?
             var texture = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "caja.jpg");
             box = TGCBox.fromSize(size, texture);
+            yaCheckeada = false;
 
             var minInferior = box.BoundingBox.PMin;
             var maxInferior = box.BoundingBox.PMax;
@@ -106,5 +109,16 @@ namespace TGC.Group.Model {
         public void resetVel() {
             vel = TGCVector3.Empty;
         }
+
+        public bool estaCheckeada()
+        {
+            return yaCheckeada;
+        }
+
+        public void setCheckeada(bool valor)
+        {
+            yaCheckeada = valor;
+        }
+
     }
 }

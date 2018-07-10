@@ -2,6 +2,7 @@
 using Microsoft.DirectX.Direct3D;
 using Microsoft.DirectX.DirectInput;
 using System.Drawing;
+using System.Linq;
 using TGC.Core.Camara;
 using TGC.Core.Collision;
 using TGC.Core.Direct3D;
@@ -253,25 +254,43 @@ namespace TGC.Group.Model.Scenes {
             }
         }
 
-        // Checkeo si la caja esta colisionando con una plataforma estatica o pared en
+        // Checkeo si la caja esta colisionando con una plataforma, pared, mesh o lo que sea en
         // la direccion del rayoEmpuje. Devuelve true si lo esta haciendo, false si no
         private bool checkearColisionCajaEstaticos(Caja unaCaja, TgcRay rayoEmpuje)
         {
 
+            unaCaja.setCheckeada(true);            // Para no compararla consigo misma
             var centroCaja = unaCaja.getCuerpo().calculateBoxCenter();
             var finCaja = centroCaja + rayoEmpuje.Direction * 80f;
 
-            foreach(var estatico in nivel.getEstaticos())
+            foreach(var aabb in nivel.getBoundingBoxes())
             {
 
-                TGCVector3 auxiliar = new TGCVector3();
+                TGCVector3 auxiliarAABB = new TGCVector3();
 
-                if (TgcCollisionUtils.intersectSegmentAABB(centroCaja, finCaja, estatico, out auxiliar))
+                if (TgcCollisionUtils.intersectSegmentAABB(centroCaja, finCaja, aabb, out auxiliarAABB))
                 {
                     return true;
                 }
                                
             }
+
+            foreach(var otraCaja in nivel.getCajas())
+            {
+
+                TGCVector3 auxiliarCaja = new TGCVector3();
+
+                if(!otraCaja.estaCheckeada())
+                {
+                    if (TgcCollisionUtils.intersectSegmentAABB(centroCaja, finCaja, otraCaja.getCuerpo(), out auxiliarCaja))
+                    {
+                        return true;
+                    }
+                }
+
+            }
+
+            unaCaja.setCheckeada(false);            // Todo normal de nuevo
 
             return false;
 

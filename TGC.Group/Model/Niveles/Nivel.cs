@@ -159,15 +159,57 @@ namespace TGC.Group.Model.Niveles {
                 .ToList();
         }
 
+        /// Usadas en un par de funciones
+        public List<TgcBoundingAxisAlignBox> aabbDeCajas()
+        {
+
+            var list = new List<TgcBoundingAxisAlignBox>();
+            list.AddRange(cajas.Select(caja => caja.getSuperior()).ToArray());
+            return list;
+
+        }
+
+        public List<TgcBoundingAxisAlignBox> aabbDeParedes()
+        {
+
+            var list = new List<TgcBoundingAxisAlignBox>();
+            list.AddRange(pEstaticas.Select(plataforma => plataforma.getAABB()).ToArray());
+            return list;
+
+        }
+
+        public List<TgcBoundingAxisAlignBox> aabbDeDesplazantes()
+        {
+
+            var list = new List<TgcBoundingAxisAlignBox>();
+            list.AddRange(pDesplazan.Select(desplazante => desplazante.getAABB()).ToArray());
+            return list;
+
+        }
+
+        public List<TgcBoundingAxisAlignBox> aabbDeRotantes()
+        {
+
+            var list = new List<TgcBoundingAxisAlignBox>();
+            list.AddRange(pRotantes.Select(rotante => rotante.getAABB()).ToArray());
+            return list;
+
+        }
+
+        public List<TgcBoundingAxisAlignBox> aabbDeAscensores()
+        {
+
+            var list = new List<TgcBoundingAxisAlignBox>();
+            list.AddRange(pAscensor.Select(ascensor => ascensor.getAABB()).ToArray());
+            return list;
+
+        }
+
         public List<TgcBoundingAxisAlignBox> getBoundingBoxes() {
+
             var list = new List<TgcBoundingAxisAlignBox>();
             list.AddRange(getPisos().ToArray());
-            list.AddRange(cajas.Select(caja => caja.getSuperior()).ToArray());
-            //list.AddRange(cajas.Select(caja => caja.getCuerpo()).ToArray());
-            list.AddRange(pEstaticas.Select(plataforma => plataforma.getAABB()).ToArray());
-            list.AddRange(pDesplazan.Select(desplazante => desplazante.getAABB()).ToArray());
-            list.AddRange(pRotantes.Select(rotante => rotante.getAABB()).ToArray());
-            list.AddRange(pAscensor.Select(ascensor => ascensor.getAABB()).ToArray());
+            list.AddRange(this.aabbDeCajas());
             list.AddRange(aabbDeDecorativos);
             list.AddRange(aabbSegmentoRampa);
 
@@ -175,24 +217,29 @@ namespace TGC.Group.Model.Niveles {
         }
 
         public List<TgcBoundingAxisAlignBox> getPisos() {
+
             var list = new List<TgcBoundingAxisAlignBox>();
             list.AddRange(pisosNormales.Select(piso => piso.BoundingBox).ToArray());
             list.AddRange(pisosResbaladizos.Select(piso => piso.BoundingBox).ToArray());
-            list.AddRange(pEstaticas.Select(caja => caja.getAABB()).ToArray());
-            list.AddRange(pDesplazan.Select(caja => caja.getAABB()).ToArray());
-            list.AddRange(pRotantes.Select(caja => caja.getAABB()).ToArray());
-            list.AddRange(pAscensor.Select(caja => caja.getAABB()).ToArray());
+            list.AddRange(this.aabbDeParedes());
+            list.AddRange(this.aabbDeDesplazantes());
+            list.AddRange(this.aabbDeRotantes());
+            list.AddRange(this.aabbDeAscensores());
 
             return list;
+
         }
 
         public List<TgcBoundingAxisAlignBox> getEstaticos() {
 
             var list = new List<TgcBoundingAxisAlignBox>();
-            list.AddRange(pEstaticas.Select(caja => caja.getAABB()).ToArray());
+            list.AddRange(this.aabbDeParedes());
+            list.AddRange(this.aabbDeDesplazantes());
+            list.AddRange(this.aabbDeRotantes());
+            list.AddRange(this.aabbDeAscensores());
             list.AddRange(aabbDeDecorativos);
             list.AddRange(aabbSegmentoRampa);
-
+            
             return list;
         }
 
