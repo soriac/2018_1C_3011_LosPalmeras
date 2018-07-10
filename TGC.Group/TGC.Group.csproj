@@ -357,6 +357,7 @@
     <Content Include="Media\NsanityBeach.mp3" />
     <Content Include="Media\paredJungla.jpg" />
     <Content Include="Media\piedra.jpg" />
+    <Content Include="Media\Piramides.png" />
     <Content Include="Media\pisada.png" />
     <Content Include="Media\piso.jpg" />
     <Content Include="Media\pisoJungla.jpg" />
@@ -407,6 +408,8 @@
     <Content Include="Media\Sounds\deathSound.mp3" />
     <Content Include="Media\stamina.png" />
     <Content Include="Media\staminaUnidad.png" />
+    <Content Include="Media\Trineo.png" />
+    <Content Include="Media\Trofeo.png" />
     <Content Include="Media\tronco.jpg" />
     <Content Include="Media\vida.png" />
     <Content Include="obj\Debug\TGC.Group.csproj.FileListAbsolute.txt" />

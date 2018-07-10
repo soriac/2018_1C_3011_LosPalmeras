@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TGC.Core.BoundingVolumes;
+using TGC.Core.Direct3D;
 using TGC.Core.Geometry;
 using TGC.Core.Mathematica;
 using TGC.Core.SceneLoader;
@@ -15,6 +16,12 @@ namespace TGC.Group.Model.Niveles {
 
         protected const float VELPEPE = 200f;
 
+        // Las hago constantes por su reutilizacion; ambas box son del mismo tamanio
+        protected TGCVector3 SIZE_LFBOX = new TGCVector3(100, 60, 150);
+        protected TGCVector3 POS_LFBOX = new TGCVector3(0, 30, 100);
+        protected TGCVector3 POS_VBOX = new TGCVector3(0, 330, 100);
+
+        protected TgcTexture caja, trofeo;
         protected List<TgcTexture> texturasUsadas;
         protected List<TgcPlane> pisosNormales;
         protected List<TgcPlane> pisosResbaladizos;
@@ -30,6 +37,7 @@ namespace TGC.Group.Model.Niveles {
         protected List<TgcBoundingAxisAlignBox> aabbSegmentoRampa;
         protected TgcSceneLoader loaderDeco;
         protected TGCBox lfBox;
+        protected TGCBox victoryBox;
         protected TgcSkyBox skyBox;
         protected string pathSkyBox;
         public Nivel siguienteNivel;
@@ -51,6 +59,14 @@ namespace TGC.Group.Model.Niveles {
             aabbDeDecorativos = new List<TgcBoundingAxisAlignBox>();
             aabbSegmentoRampa = new List<TgcBoundingAxisAlignBox>();
             loaderDeco = new TgcSceneLoader();
+
+            // Textura que aparece en todo nivel
+            caja = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "caja.jpg");
+            texturasUsadas.Add(caja);
+
+            // Para la VictoryBox
+            trofeo = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "Trofeo.png");
+            texturasUsadas.Add(trofeo);
 
             // TODO: ver si estos son necesarios
             pMuerte = new List<TgcPlane>();
@@ -189,6 +205,15 @@ namespace TGC.Group.Model.Niveles {
             return lfBox.BoundingBox;
         }
 
+        public TgcBoundingAxisAlignBox getVictoryBox()
+        {
+            if(victoryBox == null)
+            {
+                return null;
+            }
+            return victoryBox.BoundingBox;
+        }
+
         public bool esPisoResbaladizo(TgcBoundingAxisAlignBox piso) {
             return pisosResbaladizos.Select(p => p.BoundingBox).Contains(piso);
         }
@@ -318,14 +343,6 @@ namespace TGC.Group.Model.Niveles {
             }
         }
 
-        /* VER: Para agregar una rampa al escenario
-        public void agregarRampa(TGCVector3 centro, float ancho, float largo, TgcTexture textura)
-        {
-            var tamanio = new TGCVector3(ancho, 50, largo);
-            var rampa = new Plataforma(centro, tamanio, textura, FastMath.QUARTER_PI);
-            pEstaticas.Add(rampa);
-        }*/
-
         //NOTA: Abstraccion para crear rampas de tamaño unico
         //NO ANDA BIEN. Mejorar
         public void agregarRampa(TGCVector3 inicio, TgcTexture textura) {
@@ -352,6 +369,20 @@ namespace TGC.Group.Model.Niveles {
             superficieRampa.toMesh("superficieRampa").Transform = TGCMatrix.RotationX((FastMath.PI) / 6);
             superficieRampa.toMesh("superficieRampa").Transform = TGCMatrix.Translation(superficieRampa.Position);
             rampas.Add(superficieRampa.toMesh("superficieRampa"));
+        }
+
+        // LevelFinishBox : Box para verificar si pase de nivel
+        protected void agregarLFBox(TgcTexture textura)
+        {
+            lfBox = TGCBox.fromSize(POS_LFBOX, SIZE_LFBOX);
+            pEstaticas.Add(new Plataforma(POS_LFBOX, SIZE_LFBOX, textura));
+        }
+        
+        // VictoryBox : Box que debo tocar para ganar el juego
+        protected void agregarVictoryBox()
+        {
+            victoryBox = TGCBox.fromSize(POS_VBOX, SIZE_LFBOX);
+            pEstaticas.Add(new Plataforma(POS_VBOX, SIZE_LFBOX, trofeo));
         }
 
     }

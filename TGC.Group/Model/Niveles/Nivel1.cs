@@ -11,7 +11,7 @@ namespace TGC.Group.Model.Niveles {
 
     class Nivel1 : Nivel {
 
-        TgcTexture piso, limites, caja;
+        TgcTexture piso, limites, trineo;
         TgcScene[] escenasBananas;
         TgcScene[] escenasSelvaticos;
         TgcScene[] escenasPalmeras;
@@ -35,8 +35,8 @@ namespace TGC.Group.Model.Niveles {
             texturasUsadas.Add(piso);
             limites = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "paredJungla.jpg");
             texturasUsadas.Add(limites);
-            caja = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "caja.jpg");
-            texturasUsadas.Add(caja);
+            trineo = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "Trineo.png");
+            texturasUsadas.Add(trineo);
 
             // Bloques de piso (no precipicios)
             agregarPisoNormal(new TGCVector3(-700, 0, 8000), new TGCVector3(1400, 0, 2000), piso);
@@ -51,7 +51,7 @@ namespace TGC.Group.Model.Niveles {
             agregarPared(new TGCVector3(-710, 40, 5000), new TGCVector3(20, 80, 10000), limites); // limite derecho
             agregarPared(new TGCVector3(0, 40, 9990), new TGCVector3(1400, 80, 20), limites);     // frente
             agregarPared(new TGCVector3(0, 40, 10), new TGCVector3(1400, 80, 20), limites);       // fondo
-            agregarEscaleraLateralIzquierda(new TGCVector3(0, 5, 6800), 40, new TGCVector3(150, 10, 20), caja);
+            //agregarEscaleraLateralIzquierda(new TGCVector3(0, 5, 6800), 40, new TGCVector3(150, 10, 20), caja);
             //agregarEscaleraFrontal(new TGCVector3(0, 5, 6800), 40, new TGCVector3(150, 10, 20), caja);
             //agregarRampa(new TGCVector3(0, 5, 6800), caja);
 
@@ -114,9 +114,7 @@ namespace TGC.Group.Model.Niveles {
             cargarDecorativo(roca, escenasRocas[6], new TGCVector3(300, 0, 4700), new TGCVector3(1, 1, 1), 0);
             cargarDecorativo(roca, escenasRocas[7], new TGCVector3(-300, 0, 4700), new TGCVector3(1, 1, 1), 0);
 
-            // LevelFinishBox : Box para verificar si pase de nivel
-            lfBox = TGCBox.fromSize(new TGCVector3(0, 100, 100), new TGCVector3(100, 100, 100));
-            pEstaticas.Add(new Plataforma(new TGCVector3(0, 0, 100), new TGCVector3(100, 100, 100), caja));
+            agregarLFBox(trineo);
 
             siguienteNivel = new Nivel2(mediaDir);
 

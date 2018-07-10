@@ -9,7 +9,7 @@ namespace TGC.Group.Model.Niveles
 {
     class Nivel3 : Nivel
     {
-        TgcTexture arena, piedra, caja;
+        TgcTexture arena, piedra;
         TgcScene[] escenasCalaveras;
         TgcScene[] escenasEsqueletos;
         TgcScene[] escenasFaraones;
@@ -38,8 +38,6 @@ namespace TGC.Group.Model.Niveles
             texturasUsadas.Add(arena);
             piedra = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "piedra.jpg");
             texturasUsadas.Add(piedra);
-            caja = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "caja.jpg");
-            texturasUsadas.Add(caja);
 
             /// Bloques de piso (no precipicios)
             // Pisos inferiores, en Y = 0

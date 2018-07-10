@@ -12,7 +12,7 @@ namespace TGC.Group.Model.Niveles {
     class Nivel2 : Nivel
     {
 
-        TgcTexture nieve, hielo, caja;
+        TgcTexture nieve, hielo, piramides;
         TgcScene[] escenasLiquenes;
         TgcScene[] escenasRocas;
         private TgcMesh liquen;
@@ -33,8 +33,8 @@ namespace TGC.Group.Model.Niveles {
             texturasUsadas.Add(nieve);
             hielo = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "hielo.jpg");
             texturasUsadas.Add(hielo);
-            caja = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "caja.jpg");
-            texturasUsadas.Add(caja);
+            piramides = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "Piramides.png");
+            texturasUsadas.Add(piramides);
 
             // Bloques de piso (no precipicios); nieve no patina, hielo si
             agregarPisoNormal(new TGCVector3(-700, 0, 4500), new TGCVector3(1400, 0, 5500), nieve);
@@ -99,7 +99,7 @@ namespace TGC.Group.Model.Niveles {
             cargarDecorativo(roca, escenasRocas[10], new TGCVector3(300, 0, 6500), new TGCVector3(8, 2, 5), 0);
             cargarDecorativo(roca, escenasRocas[11], new TGCVector3(-300, 0, 5500), new TGCVector3(8, 2, 5), 0);
 
-            lfBox = TGCBox.fromSize(new TGCVector3(0, 0, 100), new TGCVector3(100, 100, 100));
+            agregarLFBox(piramides);
 
             siguienteNivel = new Nivel3(mediaDir);
 
