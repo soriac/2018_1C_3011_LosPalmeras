@@ -21,7 +21,6 @@ namespace TGC.Group.Model.Escenas {
         private ElementoTexto textoGameOver;
         private Boton reiniciar;
         private Sprite s;
-        //private Texture crashDead;
         private TgcTexture fondo;
         private Viewport viewport = D3DDevice.Instance.Device.Viewport;
 
@@ -30,7 +29,6 @@ namespace TGC.Group.Model.Escenas {
             textoGameOver = new ElementoTexto("GAME OVER", 0.4f, 0f);
             reiniciar = new Boton("REINICIAR", 0.5f, 0.5f, () => EscenaManager.getInstance().goBack());
             s = new Sprite(D3DDevice.Instance.Device);
-            //crashDead = TextureLoader.FromFile(D3DDevice.Instance.Device, mediaDir + "gameOverCrash.jpg");
             fondo = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "gameOverFondo.jpg");
 
         }
@@ -58,10 +56,6 @@ namespace TGC.Group.Model.Escenas {
             textoGameOver.Render();
 
             reiniciar.Render();
-
-            //s.Begin(SpriteFlags.None);
-            //s.Draw(crashDead, new Vector3(0, 0, 0), new Vector3(200, 200, 0), 16777215);
-            //s.End();
 
         }
 

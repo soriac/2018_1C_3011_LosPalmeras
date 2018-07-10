@@ -10,6 +10,7 @@ using TGC.Core.Input;
 using TGC.Core.Mathematica;
 using TGC.Core.Shaders;
 using TGC.Core.Textures;
+using TGC.Group.Model.Escenas;
 using TGC.Group.Model.Niveles;
 
 namespace TGC.Group.Model.Scenes {
@@ -78,6 +79,13 @@ namespace TGC.Group.Model.Scenes {
                     nivel.siguienteNivel.setEffect(smEffect);
                     setNivel(nivel.siguienteNivel);
                 }
+            }
+
+            // Checkear si toque la victoryBox
+            if(nivel.getVictoryBox() != null && TgcCollisionUtils.testSphereAABB(personaje.getBoundingSphere(), nivel.getVictoryBox()))
+            {
+                EscenaManager.getInstance().goBack();
+                EscenaManager.getInstance().addScene(new GameVictoryEscena());
             }
 
             checkearMuerte();

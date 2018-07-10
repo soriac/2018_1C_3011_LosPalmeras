@@ -98,6 +98,7 @@
     <Compile Include="Model\Entidades\PlataformaAscensor.cs" />
     <Compile Include="Model\Entidades\PlataformaDesplazante.cs" />
     <Compile Include="Model\Entidades\PlataformaRotante.cs" />
+    <Compile Include="Model\Escenas\GameVictoryEscena.cs" />
     <Compile Include="Model\Escenas\GameOverEscena.cs" />
     <Compile Include="Model\Escenas\InicioEscena.cs" />
     <Compile Include="Model\Escenas\OpcionesEscena.cs" />
@@ -322,7 +323,6 @@
     <Content Include="Media\Decorativos\Roca\Roca-TgcScene.xml" />
     <Content Include="Media\Decorativos\Roca\Textures\Piedra3.jpg" />
     <Content Include="Media\fondoInicio.jpg" />
-    <Content Include="Media\gameOverCrash.jpg" />
     <Content Include="Media\gameOverFondo.jpg" />
     <Content Include="Media\hielo.jpg" />
     <Content Include="Media\Jungla\Agua-TgcScene.xml" />
@@ -411,6 +411,7 @@
     <Content Include="Media\Trineo.png" />
     <Content Include="Media\Trofeo.png" />
     <Content Include="Media\tronco.jpg" />
+    <Content Include="Media\victoryFondo.jpg" />
     <Content Include="Media\vida.png" />
     <Content Include="obj\Debug\TGC.Group.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TGC.Group.exe" />

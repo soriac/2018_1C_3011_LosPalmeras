@@ -141,7 +141,7 @@ namespace TGC.Group.Model.Niveles
             cargarDecorativo(palmera, escenasPalmeras[6], new TGCVector3(600, 300, 2800), new TGCVector3(1, 1, 1), 0);
             cargarDecorativo(palmera, escenasPalmeras[7], new TGCVector3(600, 300, 3600), new TGCVector3(1, 1, 1), 0);
 
-            //lfBox = TGCBox.fromSize(new TGCVector3(0, 0, 100), new TGCVector3(100, 100, 100));
+            agregarVictoryBox();
 
         }
 
