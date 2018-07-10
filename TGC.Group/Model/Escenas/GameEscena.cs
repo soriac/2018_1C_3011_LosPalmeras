@@ -240,6 +240,7 @@ namespace TGC.Group.Model.Scenes {
 
                     caja.move(cajaMovementDeseado); //TEMP
                     //personaje.playSound(3);
+
                 }
             }
         }

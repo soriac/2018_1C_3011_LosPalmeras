@@ -328,6 +328,10 @@ namespace TGC.Group.Model {
             rayoVelocidad.Origin = this.getBoundingSphere().Center;
             rayoVelocidad.Direction = movement;
 
+            TgcRay rayoVelPies = new TgcRay();
+            rayoVelPies.Origin = this.getPies().Center;
+            rayoVelPies.Direction = movement;
+
             TGCVector3 closest = new TGCVector3();
             TGCVector3 aux = new TGCVector3();
             TgcBoundingAxisAlignBox colisionadorCercano = null;
@@ -335,6 +339,7 @@ namespace TGC.Group.Model {
             // busco entre los colliders del nivel con cuales colisiona
             // el rayo de movimiento, y de esos saco el mas cercano
             colliders.ForEach(c => {
+
                 bool colisiona = TgcCollisionUtils.intersectRayAABB(rayoVelocidad, c, out aux);
 
                 if (colisiona) {
@@ -343,6 +348,18 @@ namespace TGC.Group.Model {
                         closest = aux;
                     }
                 }
+
+                bool colisionaPies = TgcCollisionUtils.intersectRayAABB(rayoVelPies, c, out aux);
+
+                if(colisionaPies)
+                {
+                    if (colisionadorCercano == null || closest.LengthSq() > aux.LengthSq())
+                    {
+                        colisionadorCercano = c;
+                        closest = aux;
+                    }
+                }
+
             });
 
             // por si no hay paredes en el nivel
