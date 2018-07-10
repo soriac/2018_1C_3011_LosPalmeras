@@ -256,7 +256,8 @@ namespace TGC.Group.Model.Niveles {
             aabbDeDecorativos.Add(unDecorativo.BoundingBox);
         }
 
-        public void agregarEscalera(TGCVector3 origen, int cantidadEscalones, TGCVector3 tamanioEscalon, TgcTexture textura) {
+        //Agrega una escalera subiendo hacia el frente, cuyo primero escalon esta en origen
+        public void agregarEscaleraFrontal(TGCVector3 origen, int cantidadEscalones, TGCVector3 tamanioEscalon, TgcTexture textura) {
             //NOTA: origen debe ser el CENTRO del primer escalon
             var alto = tamanioEscalon.Y;
             var largo = tamanioEscalon.Z; //profundidad
@@ -264,9 +265,51 @@ namespace TGC.Group.Model.Niveles {
             var escalon = new Plataforma(centroEscalon, tamanioEscalon, textura);
             pEstaticas.Add(escalon);
             int i;
-            for (i = 2; i <= cantidadEscalones; i++) {
+            for(i = 2; i <= cantidadEscalones; i++) {
                 centroEscalon.Y += alto;
                 centroEscalon.Z -= largo;
+                escalon = new Plataforma(centroEscalon, tamanioEscalon, textura);
+                pEstaticas.Add(escalon);
+            }
+        }
+
+        //Agrega una escalera que sube de izquierda a derecha, igual que para las frontales
+        public void agregarEscaleraLateralDerecha(TGCVector3 origen, int cantidadEscalones, TGCVector3 tamanioEscalon, TgcTexture textura)
+        {
+            //NOTA: Los tamaños se pasan como si estuviera de frente
+            var alto = tamanioEscalon.Y;
+            var largo = tamanioEscalon.Z;
+            tamanioEscalon.Z = tamanioEscalon.X;
+            tamanioEscalon.X = largo;
+            var centroEscalon = origen;
+            var escalon = new Plataforma(centroEscalon, tamanioEscalon, textura);
+            pEstaticas.Add(escalon);
+            int i;
+            for(i = 2; i <= cantidadEscalones; i++)
+            {
+                centroEscalon.Y += alto;
+                centroEscalon.X -= largo;
+                escalon = new Plataforma(centroEscalon, tamanioEscalon, textura);
+                pEstaticas.Add(escalon);
+            }
+        }
+
+        //Agrega una escalera que sube de derecha a izquierda
+        public void agregarEscaleraLateralIzquierda(TGCVector3 origen, int cantidadEscalones, TGCVector3 tamanioEscalon, TgcTexture textura)
+        {
+            //NOTA: Los tamaños se pasan como si estuviera de frente
+            var alto = tamanioEscalon.Y;
+            var largo = tamanioEscalon.Z;
+            tamanioEscalon.Z = tamanioEscalon.X;
+            tamanioEscalon.X = largo;
+            var centroEscalon = origen;
+            var escalon = new Plataforma(centroEscalon, tamanioEscalon, textura);
+            pEstaticas.Add(escalon);
+            int i;
+            for (i = 2; i <= cantidadEscalones; i++)
+            {
+                centroEscalon.Y += alto;
+                centroEscalon.X += largo;
                 escalon = new Plataforma(centroEscalon, tamanioEscalon, textura);
                 pEstaticas.Add(escalon);
             }
