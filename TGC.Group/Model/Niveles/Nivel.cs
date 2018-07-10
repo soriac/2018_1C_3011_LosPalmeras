@@ -171,8 +171,11 @@ namespace TGC.Group.Model.Niveles {
         }
 
         public List<TgcBoundingAxisAlignBox> getEstaticos() {
+
             var list = new List<TgcBoundingAxisAlignBox>();
             list.AddRange(pEstaticas.Select(caja => caja.getAABB()).ToArray());
+            list.AddRange(aabbDeDecorativos);
+            list.AddRange(aabbSegmentoRampa);
 
             return list;
         }

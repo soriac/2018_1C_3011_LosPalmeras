@@ -189,37 +189,52 @@ namespace TGC.Group.Model.Scenes {
         }
 
         private void checkearEmpujeCajas() {
+
             foreach (var caja in nivel.getCajas()) {
+
                 if (TgcCollisionUtils.testSphereAABB(personaje.getBoundingSphere(), caja.getCuerpo())) {
 
-                    // obtengo dirección para mover la caja
-                    var distanciaPersonajeCaja = caja.getCuerpo().calculateBoxCenter() - personaje.getBoundingSphere().Center;
+                    // Direccion en la que estoy queriendo mover la caja
+                    var centroCaja = caja.getCuerpo().calculateBoxCenter();
+                    var centroPersonaje = personaje.getBoundingSphere().Center;
+                    var distanciaPersonajeCaja = centroCaja - centroPersonaje;
+
+                    // Hacia donde va a moverse finalmente la caja
                     var cajaMovementDeseado = TGCVector3.Empty;
 
-                    // TODO: Mejorar checkearColisionCajaEstaticos; aun no anda bien
-                    if (FastMath.Abs(distanciaPersonajeCaja.X) > FastMath.Abs(distanciaPersonajeCaja.Z)) {
-                        if (distanciaPersonajeCaja.X > 0) {
-                            //if(checkearColisionCajaEstaticos(caja) != 1)
-                            //{
+                    // Lo guardo en otra estructura para no joder a distanciaPersonajeCaja; lo necesito normalizado
+                    var direccionRayo = distanciaPersonajeCaja;
+                    direccionRayo.Normalize();
+
+                    // Rayo con la direccion en la que quiero mover la caja
+                    TgcRay rayoMovimiento = new TgcRay();
+                    //rayoMovimiento.Origin = centroPersonaje;
+                    rayoMovimiento.Direction = direccionRayo;
+
+                    // Solo si no colisiona con ningun estatico; TODO: Implementar colision con otras cajas
+                    if(!checkearColisionCajaEstaticos(caja, rayoMovimiento))
+                    {
+                        if (FastMath.Abs(distanciaPersonajeCaja.X) > FastMath.Abs(distanciaPersonajeCaja.Z))
+                        {
+                            if (distanciaPersonajeCaja.X > 0)      // Empujo desde la izquierda
+                            {
                                 cajaMovementDeseado = new TGCVector3(5, 0, 0);
-                            //}
-                        } else {
-                            //if(checkearColisionCajaEstaticos(caja) != 3)
-                            //{
+                            }
+                            else                                   // Empujo desde la derecha
+                            {
                                 cajaMovementDeseado = new TGCVector3(-5, 0, 0);
-                            //}
+                            }
                         }
-                    } else {
-                        if (distanciaPersonajeCaja.Z > 0) {
-                            //if(checkearColisionCajaEstaticos(caja) != 2)
-                            //{
+                        else
+                        {
+                            if (distanciaPersonajeCaja.Z > 0)      // Empujo desde el frente 
+                            {
                                 cajaMovementDeseado = new TGCVector3(0, 0, 5);
-                            //}
-                        } else {
-                            //if(checkearColisionCajaEstaticos(caja) != 4)
-                            //{
+                            }
+                            else                                   // Empujo desde la parte de atras
+                            {
                                 cajaMovementDeseado = new TGCVector3(0, 0, -5);
-                            //}
+                            }
                         }
                     }
 
@@ -229,45 +244,27 @@ namespace TGC.Group.Model.Scenes {
             }
         }
 
-        // Checkeo si la caja esta colisionando con una plataforma estatica o pared
-        // 0 si no choca con ninguna; 1 si tiene una delante; 2 si la tiene a la derecha
-        // 3 si tiene una atras; 4 si tiene una a la izquierda (visto desde la camara)
-        private int checkearColisionCajaEstaticos(Caja unaCaja)
+        // Checkeo si la caja esta colisionando con una plataforma estatica o pared en
+        // la direccion del rayoEmpuje. Devuelve true si lo esta haciendo, false si no
+        private bool checkearColisionCajaEstaticos(Caja unaCaja, TgcRay rayoEmpuje)
         {
+
+            var centroCaja = unaCaja.getCuerpo().calculateBoxCenter();
+            var finCaja = centroCaja + rayoEmpuje.Direction * 80f;
 
             foreach(var estatico in nivel.getEstaticos())
             {
 
-                var distanciaEntreObjetos = unaCaja.getCuerpo().calculateBoxCenter() - estatico.calculateBoxCenter();
+                TGCVector3 auxiliar = new TGCVector3();
 
-                if (TgcCollisionUtils.testAABBAABB(unaCaja.getCuerpo(), estatico))
+                if (TgcCollisionUtils.intersectSegmentAABB(centroCaja, finCaja, estatico, out auxiliar))
                 {
-                    if(distanciaEntreObjetos.X > distanciaEntreObjetos.Z)
-                    {
-                        if(distanciaEntreObjetos.X > 0)
-                        {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 3;
-                        }
-                    }
-                    else
-                    {
-                        if(distanciaEntreObjetos.Z > 0)
-                        {
-                            return 2;
-                        }
-                        else
-                        {
-                            return 4;
-                        }
-                    }
+                    return true;
                 }
+                               
             }
 
-            return 0;
+            return false;
 
         }
 
