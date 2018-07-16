@@ -417,6 +417,7 @@
     <Content Include="obj\Debug\TGC.Group.exe" />
     <Content Include="obj\Debug\TGC.Group.pdb" />
     <Content Include="Shaders\BasicShader.fx" />
+    <Content Include="Shaders\PostProcess.fx" />
     <Content Include="Shaders\ShadowMap.fx" />
   </ItemGroup>
   <ItemGroup>

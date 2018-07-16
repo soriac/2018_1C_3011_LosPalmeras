@@ -56,7 +56,7 @@ namespace TGC.Group.Model.Scenes {
             nivel = nuevoNivel;
         }
 
-        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara) {
+        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara, ref bool huboColision) {
 
             if (deltaTime > 1) return;
 
@@ -65,7 +65,7 @@ namespace TGC.Group.Model.Scenes {
             // calculo nueva velocidad
             personaje.update(deltaTime, input);
 
-            checkearEmpujeCajas();
+            checkearEmpujeCajas(ref huboColision);
             aplicarGravedadCajas();
 
             personaje.move(deltaTime, nivel, VEC_GRAVEDAD);
@@ -197,11 +197,13 @@ namespace TGC.Group.Model.Scenes {
             barraStamina.dispose();
         }
 
-        private void checkearEmpujeCajas() {
+        private void checkearEmpujeCajas(ref bool huboColision) {
 
             foreach (var caja in nivel.getCajas()) {
 
                 if (TgcCollisionUtils.testSphereAABB(personaje.getBoundingSphere(), caja.getCuerpo())) {
+
+                    huboColision = true;
 
                     // Direccion en la que estoy queriendo mover la caja
                     var centroCaja = caja.getCuerpo().calculateBoxCenter();

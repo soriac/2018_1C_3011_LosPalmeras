@@ -36,7 +36,7 @@ namespace TGC.Group.Model.Escenas
 
         }
 
-        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara)
+        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara, ref bool huboColision)
         {
 
             jugarDeNuevo.Update(deltaTime, input);

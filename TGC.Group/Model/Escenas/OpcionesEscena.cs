@@ -37,7 +37,7 @@ namespace TGC.Group.Model.Escenas {
             volumen.Render();
         }
 
-        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara) {
+        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara, ref bool huboColision) {
             volumen.setText(Opciones.getInstance().getVolumenMaestro().ToString());
 
             volver.Update(deltaTime, input);

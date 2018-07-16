@@ -33,7 +33,7 @@ namespace TGC.Group.Model.Scenes {
             return instance;
         }
 
-        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara) {
+        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara, ref bool huboColision) {
             if (proxima != null) {
                 actual = proxima;
                 proxima = null;
@@ -41,7 +41,7 @@ namespace TGC.Group.Model.Scenes {
 
             if (actual == null) return;
 
-            actual.update(deltaTime, input, camara);
+            actual.update(deltaTime, input, camara, ref huboColision);
         }
 
         public void render(float deltaTime) {

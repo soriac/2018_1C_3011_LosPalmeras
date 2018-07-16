@@ -27,7 +27,7 @@ namespace TGC.Group.Model.Escenas {
             fondo = TgcTexture.createTexture(D3DDevice.Instance.Device, mediaDir + "fondoInicio.jpg");
         }
 
-        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara) {
+        public void update(float deltaTime, TgcD3dInput input, TgcCamera camara, ref bool huboColision) {
             jugar.Update(deltaTime, input);
             opciones.Update(deltaTime, input);
         }
