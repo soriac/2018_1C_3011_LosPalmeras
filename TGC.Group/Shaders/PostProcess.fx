@@ -71,7 +71,7 @@ technique DefaultTechnique
 /* ALARMA */
 /**************************************************************************************/
 
-float alarmaScaleFactor = 0.1;
+float alarmaScaleFactor = 20;
 
 //Textura alarma
 texture textura_alarma;
