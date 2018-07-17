@@ -9,16 +9,18 @@ Proyecto realizado por estudiantes de la carrera Ingeniería en Sistemas de Info
 * [TGC.Core](https://www.nuget.org/packages/TGC.Core/) (se baja automáticamente al hacer build por primera vez)
 
 ## Integrantes ##
-TGC, Tgcito  |  Apellido, Nombre
+Soria, Cristian Marcelo  |  Giuseppe Ciavirella
 ------------ | -------------
-<img src="https://github.com/tgc-utn/tgc-utn.github.io/blob/master/images/robotgc.png" height="500"> | <img src="https://github.com/tgc-utn/tgc-utn.github.io/blob/master/images/trofeotp.png" height="500">
+<img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/soria.jpg" height="500"> | <img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/pepeCrack.jpg" height="500">
 
 ## ScreenShot ##
-![screenshot1](https://github.com/tgc-utn/tgc-group/blob/master/TGC.Group/Media/cajaMadera4.jpg)
-![screenshot2](https://github.com/tgc-utn/tgc-group/blob/master/TGC.Group/Media/cajaMadera4.jpg)
-![screenshot3](https://github.com/tgc-utn/tgc-group/blob/master/TGC.Group/Media/cajaMadera4.jpg)
-![screenshot4](https://github.com/tgc-utn/tgc-group/blob/master/TGC.Group/Media/cajaMadera4.jpg)
-![screenshot5](https://github.com/tgc-utn/tgc-group/blob/master/TGC.Group/Media/cajaMadera4.jpg)
+![screenshot1](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/1.jpg)
+![screenshot2](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/2.jpg)
+![screenshot3](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/3.jpg)
+![screenshot4](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/4.jpg)
+![screenshot5](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/5.jpg)
+![screenshot6](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/6.jpg)
+![screenshot7](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/7.jpg)
 
 ## Game Play ##
-[![Watch the video](https://img.youtube.com/vi/qESIu8ozanU/0.jpg)](https://www.youtube.com/playlist?list=PLRM4L32DjvnazuMl8wZlbpEYL5Qh63ulG)
+[![Watch the video](https://img.youtube.com/vi/rrhJkXLWQWY/0.jpg)](https://www.youtube.com/watch?v=rrhJkXLWQWY)
