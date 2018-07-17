@@ -11,14 +11,14 @@ Proyecto realizado por estudiantes de la carrera Ingeniería en Sistemas de Info
 ## Integrantes ##
 Soria, Cristian Marcelo  |  Giuseppe Ciavirella
 ------------ | -------------
-<img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/soria.jpg" height="500"> | <img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/pepeCrack.jpg" height="500">
+<img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/soria.jpg" height="300"> | <img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/pepeCrack.jpg" height="300">
 
 ## ScreenShot ##
 ![screenshot1](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/1.jpg)
 ![screenshot2](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/2.jpg)
-![screenshot3](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/3.jpg)
-![screenshot4](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/4.jpg)
-![screenshot5](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/5.jpg)
+![screenshot3](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/3.png)
+![screenshot4](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/4.png)
+![screenshot5](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/5.png)
 ![screenshot6](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/6.jpg)
 ![screenshot7](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/7.jpg)
 
