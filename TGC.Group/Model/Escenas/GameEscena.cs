@@ -131,7 +131,7 @@ namespace TGC.Group.Model.Scenes {
             g_pShadowMap = new Texture(D3DDevice.Instance.Device, SM_SIZE, SM_SIZE, 1, Usage.RenderTarget, Format.R32F, Pool.Default);
             g_pDDSShadow = D3DDevice.Instance.Device.CreateDepthStencilSurface(SM_SIZE, SM_SIZE, DepthFormat.D24S8, MultiSampleType.None, 0, true);
 
-            g_mShadowProj = TGCMatrix.PerspectiveFovLH(Geometry.DegreeToRadian(80), D3DDevice.Instance.AspectRatio, 50, 5000); 
+            g_mShadowProj = TGCMatrix.PerspectiveFovLH(Geometry.DegreeToRadian(80), D3DDevice.Instance.AspectRatio, 50, 5000);
         }
 
         private void renderShadowMap(float deltaTime) {
@@ -236,7 +236,7 @@ namespace TGC.Group.Model.Scenes {
                         }
                         else
                         {
-                            if (distanciaPersonajeCaja.Z > 0)      // Empujo desde el frente 
+                            if (distanciaPersonajeCaja.Z > 0)      // Empujo desde el frente
                             {
                                 cajaMovementDeseado = new TGCVector3(0, 0, 5);
                             }
@@ -272,7 +272,7 @@ namespace TGC.Group.Model.Scenes {
                 {
                     return true;
                 }
-                               
+
             }
 
             foreach(var otraCaja in nivel.getCajas())
@@ -325,4 +325,4 @@ namespace TGC.Group.Model.Scenes {
         }
 
     }
-} 
+}

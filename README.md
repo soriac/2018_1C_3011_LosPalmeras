@@ -1,11 +1,6 @@
 # tgc-group
-[![Build status](https://ci.appveyor.com/api/projects/status/uvyboubq91uhwf3v?svg=true)](https://ci.appveyor.com/project/rejurime/tgc-group)
-[![BCH compliance](https://bettercodehub.com/edge/badge/tgc-utn/tgc-group?branch=master)](https://bettercodehub.com/)
-[![GitHub license](https://img.shields.io/github/license/tgc-utn/tgc-group.svg)](https://github.com/tgc-utn/tgc-group/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/tgc-utn/tgc-group.svg)](https://github.com/tgc-utn/tgc-group/releases)
-
 ## Descripción
-Proyecto plantilla para los trabajos prácticos de la asignatura electiva [Técnicas de Gráficos por Computadora](http://tgc-utn.github.io/) (TGC) en la carrera de Ingeniería en Sistemas de Información. Universidad Tecnológica Nacional, Facultad Regional Buenos Aires (UTN-FRBA).
+Proyecto realizado por estudiantes de la carrera Ingeniería en Sistemas de Información en la UTN FRBA para la asignatura electiva [Técnicas de Gráficos por Computadora](http://tgc-utn.github.io/) (TGC).
 
 ## Requisitos
 * [DirectX 9 SDK](http://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=6812)
