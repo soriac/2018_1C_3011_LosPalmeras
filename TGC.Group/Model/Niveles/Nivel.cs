@@ -87,7 +87,7 @@ namespace TGC.Group.Model.Niveles {
             smEffect.SetValue("k_ls", 0.7f);
             getRenderizablesBrillantes().ForEach(r => r.Render());
 
-            if (lfBox != null) lfBox.BoundingBox.Render();
+            // if (lfBox != null) lfBox.BoundingBox.Render();
             // aabbDeDecorativos.ForEach(r => r.Render());
 
             if (skyBox != null) {
@@ -140,7 +140,7 @@ namespace TGC.Group.Model.Niveles {
                 .Concat(pRotantes)
                 .Concat(pAscensor)
                 .Concat(rampas)
-                .Concat(aabbDeDecorativos)
+                //.Concat(aabbDeDecorativos)
                 .ToList();
         }
 

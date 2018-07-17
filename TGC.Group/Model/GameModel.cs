@@ -47,7 +47,8 @@ namespace TGC.Group.Model {
 
             PreUpdate();
 
-            EscenaManager.getInstance().update(ElapsedTime, Input, Camara);
+            if (ElapsedTime < 0.02)
+                EscenaManager.getInstance().update(ElapsedTime, Input, Camara);
 
             PostUpdate();
         }

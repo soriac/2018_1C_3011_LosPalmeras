@@ -29,7 +29,6 @@ namespace TGC.Group.Model {
 
         public override void Render() {
             box.Render();
-            box.BoundingBox.Render();
         }
     }
 }

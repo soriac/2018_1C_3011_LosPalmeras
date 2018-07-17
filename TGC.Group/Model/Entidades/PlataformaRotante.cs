@@ -21,7 +21,6 @@ namespace TGC.Group.Model {
 
         public override void Render() {
             base.Render();
-            box.BoundingBox.Render();
         }
 
         public TGCVector3 getVelAsVector(TGCVector3 personajePos) {

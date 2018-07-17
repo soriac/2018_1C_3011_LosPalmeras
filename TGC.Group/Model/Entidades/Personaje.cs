@@ -144,10 +144,10 @@ namespace TGC.Group.Model {
             flecha.PStart = rayoVelocidad.Origin;
             flecha.PEnd = rayoVelocidad.Origin + rayoVelocidad.Direction * 20f;
             flecha.updateValues();
-            flecha.Render();
+            // flecha.Render();
 
             if (colisionadorCercanoDebug != null) {
-                colisionadorCercanoDebug.setRenderColor(Color.Blue);
+                // colisionadorCercanoDebug.setRenderColor(Color.Blue);
                 //colisionadorCercanoDebug.Render();
 
             }
