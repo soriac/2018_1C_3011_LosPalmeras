@@ -13,7 +13,7 @@ Soria, Cristian Marcelo  |  Giuseppe Ciavirella
 ------------ | -------------
 <img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/soria.jpg" height="300"> | <img src="https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/pepeCrack.jpg" height="300">
 
-## ScreenShot ##
+## Screenshots ##
 ![screenshot1](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/1.jpg)
 ![screenshot2](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/2.jpg)
 ![screenshot3](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/3.png)
@@ -22,5 +22,5 @@ Soria, Cristian Marcelo  |  Giuseppe Ciavirella
 ![screenshot6](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/6.jpg)
 ![screenshot7](https://raw.githubusercontent.com/soriac/2018_1C_3011_LosPalmeras/master/TGC.Group/gh-img/7.jpg)
 
-## Game Play ##
+## Gameplay ##
 [![Watch the video](https://img.youtube.com/vi/rrhJkXLWQWY/0.jpg)](https://www.youtube.com/watch?v=rrhJkXLWQWY)
